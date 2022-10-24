@@ -15,7 +15,14 @@
 #include "lvgl/lvgl.h"
 #include "lvgl/examples/lv_examples.h"
 #include "lvgl/demos/lv_demos.h"
+
+#if !LV_USE_GPU_SDL
 #include "lv_drivers/sdl/sdl.h"
+#endif
+
+#if LV_USE_GPU_SDL
+#include "lv_drivers/sdl/sdl_gpu.h"
+#endif
 
 /*********************
  *      DEFINES
@@ -73,7 +80,9 @@ int main(int argc, char **argv)
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
 
-//  lv_example_switch_1();
+  lv_demo_benchmark();
+
+//    lv_example_switch_1();
 //  lv_example_calendar_1();
 //  lv_example_btnmatrix_2();
 //  lv_example_checkbox_1();
@@ -91,7 +100,7 @@ int main(int argc, char **argv)
 //  lv_example_flex_3();
 //  lv_example_label_1();
 
-    lv_demo_widgets();
+//    lv_demo_widgets();
 
   while(1) {
       /* Periodically call the lv_task handler.
@@ -123,11 +132,18 @@ static void hal_init(void)
 
   /*Create a display*/
   static lv_disp_drv_t disp_drv;
+#if !LV_USE_GPU_SDL
   lv_disp_drv_init(&disp_drv); /*Basic initialization*/
+
   disp_drv.draw_buf = &disp_buf1;
   disp_drv.flush_cb = sdl_display_flush;
   disp_drv.hor_res = SDL_HOR_RES;
   disp_drv.ver_res = SDL_VER_RES;
+#endif
+
+#if LV_USE_GPU_SDL
+  sdl_disp_drv_init(&disp_drv, SDL_HOR_RES, SDL_VER_RES);
+#endif
 
   lv_disp_t * disp = lv_disp_drv_register(&disp_drv);
 
