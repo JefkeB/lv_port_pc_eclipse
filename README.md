@@ -21,7 +21,7 @@ The PC simulator is cross platform.  **Windows, Linux and OSX** are supported, h
 Clone the PC project and the related sub modules:
 
 ```
-git clone --recursive https://github.com/lvgl/lv_port_pc_eclipse.git
+git clone --recursive https://github.com/JefkeB/lv_port_pc_eclipse.git
 ```
 
 ### Install SDL
@@ -55,40 +55,3 @@ The following steps can be used with CMake on a Unix-like system. This may also 
 
 6. The binary will be in `../bin/main`, and can be run by typing that command.
 
-## Docker
-1. Build the docker container
-```
-docker build -t lvgl_simulator .
-```
-2. Run the docker container
-```
-docker run lvgl_simulator
-```
-GUI with docker is platform dependent. For example, on macOS you can follow 
-[this tutorial](https://cntnr.io/running-guis-with-docker-on-mac-os-x-a14df6a76efc) 
-and run a command similar to:
-```
-docker run -e DISPLAY=10.103.56.101:0 lvgl_simulator
-```
-
-Note that on macOS, you may need to enable indirect GLX rendering before starting Xquartz:
-```
-defaults write org.macosforge.xquartz.X11 enable_iglx -bool true
-open -a Xquartz
-```
-
-For Linux environments with X Server, the following will the `docker run` command. Note that the first command, `xhost +` grants access to X server to everyone.
-
-```
-xhost +
-docker run -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix:ro -t lvgl_simulator
-```
-
-## Contributing
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request!
-
-If you find an issue, please report it via GitHub!
