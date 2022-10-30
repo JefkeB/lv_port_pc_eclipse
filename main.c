@@ -64,6 +64,36 @@ static void hal_init(void);
 /**********************
  *  STATIC PROTOTYPES
  **********************/
+lv_style_t pageR_Button;
+lv_style_t pageR_ButtonPressed;
+
+
+void test()
+{
+  // setup styles
+  lv_style_init(&pageR_Button);
+  lv_style_set_img_recolor_opa(&pageR_Button, LV_OPA_COVER);
+  lv_style_set_img_recolor(&pageR_Button, lv_palette_main(LV_PALETTE_GREY));
+
+  lv_style_init(&pageR_ButtonPressed);
+  lv_style_set_img_recolor(&pageR_ButtonPressed, lv_palette_main(LV_PALETTE_LIME));
+
+
+  lv_obj_set_flex_flow(lv_scr_act(), LV_FLEX_FLOW_COLUMN);
+  lv_obj_set_flex_align(lv_scr_act(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+
+  // button
+  LV_IMG_DECLARE(Home_48);
+  lv_obj_t * imgButton = lv_imgbtn_create(lv_scr_act());
+
+  lv_obj_add_flag(imgButton, LV_OBJ_FLAG_CHECKABLE);
+
+  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_RELEASED, &Home_48, NULL, NULL);
+  lv_obj_add_style(imgButton, &pageR_Button, LV_IMGBTN_STATE_RELEASED);
+
+  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_CHECKED_RELEASED, &Home_48, NULL, NULL);
+  lv_obj_add_style(imgButton, &pageR_ButtonPressed, LV_IMGBTN_STATE_CHECKED_RELEASED);
+}
 
 /**********************
  *   GLOBAL FUNCTIONS
@@ -79,8 +109,9 @@ int main(int argc, char **argv)
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
+  test();
 
-  lv_demo_benchmark();
+  //lv_demo_benchmark();
 
 //    lv_example_switch_1();
 //  lv_example_calendar_1();
