@@ -73,25 +73,27 @@ void test()
   // setup styles
   lv_style_init(&pageR_Button);
   lv_style_set_img_recolor_opa(&pageR_Button, LV_OPA_COVER);
-  lv_style_set_img_recolor(&pageR_Button, lv_palette_main(LV_PALETTE_GREY));
+//  lv_style_set_img_recolor(&pageR_Button, lv_palette_main(LV_PALETTE_GREY));
+  lv_style_set_img_recolor(&pageR_Button, lv_color_make(196, 196, 196));
 
   lv_style_init(&pageR_ButtonPressed);
-  lv_style_set_img_recolor(&pageR_ButtonPressed, lv_palette_main(LV_PALETTE_LIME));
+//  lv_style_set_img_recolor(&pageR_ButtonPressed, lv_palette_main(LV_PALETTE_LIME));
+  lv_style_set_img_recolor(&pageR_ButtonPressed, lv_color_make(0, 0, 255));
 
 
   lv_obj_set_flex_flow(lv_scr_act(), LV_FLEX_FLOW_COLUMN);
   lv_obj_set_flex_align(lv_scr_act(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
   // button
-  LV_IMG_DECLARE(Home_48);
+  LV_IMG_DECLARE(mHome_48w);
   lv_obj_t * imgButton = lv_imgbtn_create(lv_scr_act());
 
   lv_obj_add_flag(imgButton, LV_OBJ_FLAG_CHECKABLE);
 
-  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_RELEASED, &Home_48, NULL, NULL);
+  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_RELEASED, &mHome_48w, NULL, NULL);
   lv_obj_add_style(imgButton, &pageR_Button, LV_IMGBTN_STATE_RELEASED);
 
-  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_CHECKED_RELEASED, &Home_48, NULL, NULL);
+  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_CHECKED_RELEASED, &mHome_48w, NULL, NULL);
   lv_obj_add_style(imgButton, &pageR_ButtonPressed, LV_IMGBTN_STATE_CHECKED_RELEASED);
 }
 
@@ -109,6 +111,8 @@ int main(int argc, char **argv)
 
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
+
+  //lv_example_img_2();
   test();
 
   //lv_demo_benchmark();
@@ -207,10 +211,11 @@ static void hal_init(void)
   indev_drv_3.read_cb = sdl_mousewheel_read;
   lv_indev_t * enc_indev = lv_indev_drv_register(&indev_drv_3);
   lv_indev_set_group(enc_indev, g);
-
+#if 0
   /*Set a cursor for the mouse*/
   LV_IMG_DECLARE(mouse_cursor_icon); /*Declare the image file.*/
   lv_obj_t * cursor_obj = lv_img_create(lv_scr_act()); /*Create an image object for the cursor */
   lv_img_set_src(cursor_obj, &mouse_cursor_icon);           /*Set the image source*/
   lv_indev_set_cursor(mouse_indev, cursor_obj);             /*Connect the image  object to the driver*/
+  #endif
 }
