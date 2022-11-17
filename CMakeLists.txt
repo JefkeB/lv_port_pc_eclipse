@@ -5,6 +5,8 @@ project(lvgl)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 find_package(SDL2 REQUIRED SDL2)
 include_directories(
         ${SDL2_INCLUDE_DIRS}

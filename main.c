@@ -93,8 +93,15 @@ void test()
   lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_RELEASED, &mHome_48w, NULL, NULL);
   lv_obj_add_style(imgButton, &pageR_Button, LV_IMGBTN_STATE_RELEASED);
 
-  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_CHECKED_RELEASED, &mHome_48w, NULL, NULL);
-  lv_obj_add_style(imgButton, &pageR_ButtonPressed, LV_IMGBTN_STATE_CHECKED_RELEASED);
+  lv_imgbtn_set_src(imgButton, LV_IMGBTN_STATE_CHECKED_PRESSED, &mHome_48w, NULL, NULL);
+  lv_obj_add_style(imgButton, &pageR_ButtonPressed, LV_IMGBTN_STATE_CHECKED_PRESSED);
+
+  // image
+  LV_IMG_DECLARE(Home_48);
+  lv_obj_t * img = lv_img_create(lv_scr_act());
+  lv_img_set_src(img, &Home_48);
+  lv_obj_set_style_img_recolor_opa(img, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_img_recolor(img, lv_palette_main(LV_PALETTE_GREEN), LV_PART_MAIN | LV_STATE_DEFAULT);
 }
 
 /**********************
